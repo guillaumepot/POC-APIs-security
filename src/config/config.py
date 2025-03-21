@@ -12,6 +12,10 @@ load_dotenv(dotenv_path='./config/.env',
 
 # CONST
 DB_NAME = os.getenv("DB_NAME")
+API_HOST = os.getenv("API_HOST")
+API_PORT = os.getenv("API_PORT")
+
+
 
 with open("./config/logger_config.yaml", "r") as f:
     LOGGER_CONFIG = yaml.safe_load(f)
