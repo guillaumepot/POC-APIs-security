@@ -1,3 +1,4 @@
+# src/config/logger_config.yaml
 logging:
   version: 1
   formatters:
@@ -19,11 +20,15 @@ logging:
     default:
       level: DEBUG
       handlers: [console]
-    generate_example_database:
+    script:
       level: DEBUG
       handlers: [console, file]
       propagate: no
     SQLiteEngine:
+      level: DEBUG
+      handlers: [console, file]
+      propagate: no
+    app:
       level: DEBUG
       handlers: [console, file]
       propagate: no

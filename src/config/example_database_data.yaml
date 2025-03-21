@@ -1,3 +1,4 @@
+# src/config/example_database_data.yaml
 tables:
   - name: users
     columns:
