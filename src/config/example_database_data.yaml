@@ -1,5 +1,12 @@
 # src/config/example_database_data.yaml
 tables:
+  - name: roles
+    columns:
+      - name: id
+        type: int
+        primary_key: true
+      - name: role_name
+        type: string
   - name: users
     columns:
       - name: id
@@ -13,12 +20,29 @@ tables:
         type: string
       - name: created_at
         type: datetime
-      - name: rple
+      - name: role
         type: int
-
+        foreign_key:
+          table: roles
+          column: id
 data:
   - table: users
     rows:
       - id: 1
         name: 'John Doe'
-        email: '
+        email:
+        password:
+        created_at:
+        role: 1
+      - id: 2
+        name: 'admin'
+        email:
+        password:
+        created_at:
+        role: 9
+  - table: roles
+    rows:
+      - id: 9
+        role_name: admin
+      - id: 1
+        role_name: user

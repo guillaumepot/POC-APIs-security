@@ -41,23 +41,18 @@ class SqliteEngine():
     def create_table(self, table:dict):
         table_name = table['name']
         columns = table['columns']
-        column_types = table['column_types']
-
-        if len(columns) != len(column_types):
-            raise ValueError(f"Not the same number of columns and column types for table {table_name}")
-        
-        columns_with_types = ", ".join(f"{col} {col_type}" for col, col_type in zip(columns, column_types))
+        columns_with_types = ", ".join(f"{col['name']} {col['type']}" for col in columns)
 
         try:
             self.cursor.execute(f'CREATE TABLE IF NOT EXISTS {table_name} ({columns_with_types})')
-            self.logger.info(f"Table {table_name} created with columns: {', '.join(columns)}")
+            self.logger.info(f"Table {table_name} created with columns: {', '.join(col['name'] for col in columns)}")
         except ValueError as ve:
             self.logger.error(f"Error creating table {table_name}: {ve}")
             raise ve
         except sqlite3.Error as e:
             self.logger.error(f"Error creating table {table_name}: {e}")
             raise e
-        
+            
 
     def show_tables(self):
         self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")

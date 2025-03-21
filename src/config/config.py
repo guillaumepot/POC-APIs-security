@@ -5,7 +5,7 @@ import os
 import yaml
 
 # Config loaders
-load_dotenv(dotenv_path='./config/.env',
+load_dotenv(dotenv_path='./src/config/.env',
             override = False)
 
 
@@ -15,16 +15,14 @@ DB_NAME = os.getenv("DB_NAME")
 API_HOST = os.getenv("API_HOST")
 API_PORT = os.getenv("API_PORT")
 
-
-
-with open("./config/logger_config.yaml", "r") as f:
+with open("./src/config/logger_config.yaml", "r") as f:
     LOGGER_CONFIG = yaml.safe_load(f)
 
-with open("./config/example_database_data.yaml", "r") as f:
-    EXAMPLE_TABLES = yaml.safe_load(f)['tables']
-    EXAMPLE_DATA = yaml.safe_load(f)['data']
 
-
+with open("./src/config/example_database_data.yaml", "r") as f:
+    DB_PRECONFIG = yaml.safe_load(f)
+    EXAMPLE_TABLES = DB_PRECONFIG['tables']
+    EXAMPLE_DATA = DB_PRECONFIG['data']
 
 # Api Tags
 

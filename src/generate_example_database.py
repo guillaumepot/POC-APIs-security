@@ -22,7 +22,8 @@ if __name__ == '__main__':
 
     # Insert data
     for data in EXAMPLE_DATA:
-        SqliteEngine(DB_NAME).insert(data['table'], data['values'])
+        for row in data['rows']:
+            SqliteEngine(DB_NAME).insert(data['table'], list(row.values()))
 
     SqliteEngine(DB_NAME).close()
 

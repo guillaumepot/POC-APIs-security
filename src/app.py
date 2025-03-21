@@ -4,14 +4,12 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from slowapi.errors import RateLimitExceeded
+
+
 import uvicorn
-
-
-
 
 from config.config import api_tags, API_HOST, API_PORT
 from routes.vuln1 import vulnerability1
-
 
 
 """
