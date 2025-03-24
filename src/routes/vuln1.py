@@ -4,11 +4,16 @@
 # Lib
 from fastapi import APIRouter, HTTPException
 
-
+from config.config import DB_NAME
 from utils.sqlite_engine import SqliteEngine
 
 
+db_engine = SqliteEngine(DB_NAME)
 
+    "sub": "user1",
+    "scopes": ["read", "write"],
+    "role": "admin"
+    }
 """
 Router Declaration
 """
@@ -19,28 +24,65 @@ vulnerability1 = APIRouter()
 """
 Routes Declaration
 """
+@vulnerability1.get('/vuln1/collaborator/{id:int}', tags=["Vuln I"])
+def get_collaborator_info_vuln(id:int):
+    # Query
+    query = "SELECT * FROM collaborators WHERE id = ?"
 
-# Route that raises an exception
+    # DB request
+    db_engine.connect()
+    response = db_engine.select(query, (id,))
+    db_engine.close()
 
-@vulnerability1.get('/vuln1/user/{id:int}', tags=["Vuln I"])
-def get_user_information(id:int):
-    query = "SELECT * FROM users WHERE id = ?"
-    response = SqliteEngine.select(query, (id,))
-
+    # Return
     if not response:
         raise HTTPException(status_code = 404,
-                            detail = "User not found")
+                            detail = "Collaborator not found")
 
-    return response
+    else:
+        return {
+                'firstname' : response[0][1],
+                'lastname' : response[0][2],
+                'phone': response[0][3],
+                'department' : response[0][4],
+                'job_name' : response[0][5],
+                'manager' : response[0][6],
+                'annual_salary': response[0][7]
+                }
+    
 
+@vulnerability1.get('/secured1/collaborator/{id:int}', tags=["Vuln I"])
+def get_collaborator_info_secured(id:int, current_user: User = Depends(get_current_user)):
 
+    # Check if the user has authorization granted by role (here: is_admin == True)
+        # Else, user can only check its own id
+    if not current_user.is_admin and current_user.id != id:
+        raise HTTPException(status_code=403, detail="Unauthorized access")
 
-# - Route permettant d'accéder à des infos utilisateurs
-#     - /user/info/<int:id>
+    # Query
+    query = "SELECT * FROM collaborators WHERE id = ?"
 
-# La route retourne des informations sur l'utilisateur en fonction de l'ID. Si l'ID n'existe pas, la route retourne une erreur 404.
+    # DB request
+    try:
+        db_engine.connect()
+        response = db_engine.select(query, (id,))
+    finally:
+        db_engine.close()
 
+    # Return
+    if not response:
+        raise HTTPException(status_code = 404,
+                            detail = "Collaborator not found")
 
-# Mitigation:
-#     - Utiliser un système d'authentification avec un access token (JWT) pour certaines routes (avec un /toekn pour obtenir un token par exemple)
-#     - utiliser un système de roles pour les utilisateurs
+    collaborator_info = {
+        'id': response[0][0],
+        'firstname': response[0][1],
+        'lastname': response[0][2],
+        'phone': response[0][3],
+        'department': response[0][4],
+        'job_name': response[0][5],
+        'manager': response[0][6],
+        'annual_salary': response[0][7]
+    }
+
+    return collaborator_info

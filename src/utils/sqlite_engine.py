@@ -1,4 +1,4 @@
-#src/modules/sqlite_engine.py
+#src/utils/sqlite_engine.py
 
 from utils.logger import LoggerManager
 import sqlite3

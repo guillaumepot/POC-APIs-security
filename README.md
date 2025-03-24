@@ -12,3 +12,5 @@ API_HOST='localhost'
 API_PORT=8000
 ```
 
+The password for the admin user is 'admin'
+The password for John Doe is 'johndoe'

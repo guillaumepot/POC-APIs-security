@@ -1,15 +1,18 @@
-# api/main.py
+#src/app.py
 
 # Lib
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
-from slowapi.errors import RateLimitExceeded
+# from fastapi.responses import JSONResponse
+# from slowapi.errors import RateLimitExceeded
 
 
 import uvicorn
 
 from config.config import api_tags, API_HOST, API_PORT
 from routes.vuln1 import vulnerability1
+from routes.login import authenticator
+
+
 
 
 """
@@ -28,6 +31,7 @@ app = FastAPI(
 OWASP vuln routers
 """
 app.include_router(vulnerability1, tags=["Vuln I"])
+app.include_router(authenticator, tags=["Utils"])
 
 
 """

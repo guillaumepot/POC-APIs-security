@@ -1,4 +1,4 @@
-#src/modules/logger.py
+#src/utils/logger.py
 
 
 import logging

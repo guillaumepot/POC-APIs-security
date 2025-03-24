@@ -175,3 +175,6 @@ cython_debug/
 
 # sqlite database file
 #*.db
+
+# vscode folder
+.vscode/*

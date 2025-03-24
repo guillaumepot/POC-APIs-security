@@ -13,7 +13,7 @@ load_dotenv(dotenv_path='./src/config/.env',
 # CONST
 DB_NAME = os.getenv("DB_NAME")
 API_HOST = os.getenv("API_HOST")
-API_PORT = os.getenv("API_PORT")
+API_PORT = int(os.getenv("API_PORT"))
 
 with open("./src/config/logger_config.yaml", "r") as f:
     LOGGER_CONFIG = yaml.safe_load(f)
@@ -24,9 +24,21 @@ with open("./src/config/example_database_data.yaml", "r") as f:
     EXAMPLE_TABLES = DB_PRECONFIG['tables']
     EXAMPLE_DATA = DB_PRECONFIG['data']
 
-# Api Tags
 
+# LOGIN Config
+SECRET_KEY = "my_secret_key"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+
+
+
+# Api Tags
 api_tags = [
+    {
+        'name': 'Utils',
+        'description': 'Utilities'
+    },
     {
         'name': 'Vuln I',
         'description': 'Broken Object Level Authorisation (BOLA)'
