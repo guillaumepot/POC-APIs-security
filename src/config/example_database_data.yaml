@@ -25,6 +25,7 @@ tables:
         foreign_key:
           table: roles
           column: id
+          
 data:
   - table: users
     rows:

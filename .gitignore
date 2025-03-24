@@ -174,4 +174,4 @@ cython_debug/
 .pypirc
 
 # sqlite database file
-*.db
+#*.db

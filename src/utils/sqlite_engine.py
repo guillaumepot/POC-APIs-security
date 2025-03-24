@@ -1,6 +1,6 @@
 #src/modules/sqlite_engine.py
 
-from modules.logger import LoggerManager
+from utils.logger import LoggerManager
 import sqlite3
 
 
@@ -69,12 +69,14 @@ class SqliteEngine():
             self.logger.error(f"Error inserting values into {table_name}: {e}")
             raise e
 
-    def select(self, query):
+    def select(self, query, params=()):
         try:
-            self.cursor.execute(query)
+            self.cursor.execute(query, params)
+            result = self.cursor.fetchall()
         except sqlite3.Error as e:
             self.logger.error(f"Error executing query {query}: {e}")
             raise e
         else:
-            self.logger.info(f"{self.cursor.fetchall()}")
+            self.logger.info(f"Executed query: {query} with parameters: {params}")
+            return result
 

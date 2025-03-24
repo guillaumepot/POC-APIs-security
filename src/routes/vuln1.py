@@ -2,7 +2,10 @@
 
 
 # Lib
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
+
+
+from utils.sqlite_engine import SqliteEngine
 
 
 
@@ -19,9 +22,17 @@ Routes Declaration
 
 # Route that raises an exception
 
-@vulnerability1.get('/user/{id:int}', tags=["Vuln I"])
+@vulnerability1.get('/vuln1/user/{id:int}', tags=["Vuln I"])
 def get_user_information(id:int):
-    return {"Done:", id}
+    query = "SELECT * FROM users WHERE id = ?"
+    response = SqliteEngine.select(query, (id,))
+
+    if not response:
+        raise HTTPException(status_code = 404,
+                            detail = "User not found")
+
+    return response
+
 
 
 # - Route permettant d'accéder à des infos utilisateurs

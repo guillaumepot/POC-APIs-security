@@ -5,8 +5,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 's
 
 
 from config.config import DB_NAME, EXAMPLE_TABLES, EXAMPLE_DATA
-from modules.logger import LoggerManager
-from modules.sqlite_engine import SqliteEngine
+from utils.logger import LoggerManager
+from utils.sqlite_engine import SqliteEngine
 
 
 logger = LoggerManager.configure_logger(name='script', verbose=False)
