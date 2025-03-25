@@ -4,6 +4,9 @@ from dotenv import load_dotenv
 import os
 import yaml
 
+from utils.cryptography import generate_secret_key
+
+
 # Config loaders
 load_dotenv(dotenv_path='./src/config/.env',
             override = False)
@@ -26,9 +29,9 @@ with open("./src/config/example_database_data.yaml", "r") as f:
 
 
 # LOGIN Config
-SECRET_KEY = "my_secret_key"
+SECRET_KEY = generate_secret_key()
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+JWT_EXPIRE = 30
 
 
 

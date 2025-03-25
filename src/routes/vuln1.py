@@ -2,18 +2,17 @@
 
 
 # Lib
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 
 from config.config import DB_NAME
 from utils.sqlite_engine import SqliteEngine
+from utils.security_functions import get_current_user
 
 
-db_engine = SqliteEngine(DB_NAME)
 
-    "sub": "user1",
-    "scopes": ["read", "write"],
-    "role": "admin"
-    }
+#db_engine = SqliteEngine(DB_NAME)
+
+
 """
 Router Declaration
 """
@@ -30,9 +29,11 @@ def get_collaborator_info_vuln(id:int):
     query = "SELECT * FROM collaborators WHERE id = ?"
 
     # DB request
-    db_engine.connect()
-    response = db_engine.select(query, (id,))
-    db_engine.close()
+    try:
+        SqliteEngine(DB_NAME).connect()
+        response = SqliteEngine(DB_NAME).select(query, (id,))
+    finally:
+        SqliteEngine(DB_NAME).close()
 
     # Return
     if not response:
@@ -51,12 +52,16 @@ def get_collaborator_info_vuln(id:int):
                 }
     
 
+
+
 @vulnerability1.get('/secured1/collaborator/{id:int}', tags=["Vuln I"])
-def get_collaborator_info_secured(id:int, current_user: User = Depends(get_current_user)):
+def get_collaborator_info_secured(id:int, current_user: dict = Depends(get_current_user)):
+
 
     # Check if the user has authorization granted by role (here: is_admin == True)
         # Else, user can only check its own id
-    if not current_user.is_admin and current_user.id != id:
+    is_admin = True if current_user['role'] == 9 else False
+    if not is_admin and current_user['id'] != id:
         raise HTTPException(status_code=403, detail="Unauthorized access")
 
     # Query
@@ -64,10 +69,10 @@ def get_collaborator_info_secured(id:int, current_user: User = Depends(get_curre
 
     # DB request
     try:
-        db_engine.connect()
-        response = db_engine.select(query, (id,))
+        SqliteEngine(DB_NAME).connect()
+        response = SqliteEngine(DB_NAME).select(query, (id,))
     finally:
-        db_engine.close()
+        SqliteEngine(DB_NAME).close()
 
     # Return
     if not response:
