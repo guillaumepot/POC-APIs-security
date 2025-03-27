@@ -1,6 +1,6 @@
 #src/utils/sqlite_engine.py
 
-from utils.logger import LoggerManager
+from src.utils.logger import LoggerManager
 import sqlite3
 
 

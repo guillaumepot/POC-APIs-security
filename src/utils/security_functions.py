@@ -7,7 +7,7 @@ from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 import jwt
 
-from config.config import SECRET_KEY, ALGORITHM, JWT_EXPIRE
+from src.config.config import SECRET_KEY, ALGORITHM, JWT_EXPIRE
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")

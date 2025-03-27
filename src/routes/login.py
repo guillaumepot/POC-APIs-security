@@ -5,10 +5,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 
-from config.config import DB_NAME
-from utils.hashing import verify_hash
-from utils.security_functions import encode_jwt, get_current_user
-from utils.sqlite_engine import SqliteEngine
+from src.config.config import DB_NAME
+from src.utils.hashing import verify_hash
+from src.utils.security_functions import encode_jwt, get_current_user
+from src.utils.sqlite_engine import SqliteEngine
 
 
 

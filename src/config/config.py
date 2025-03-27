@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 import yaml
 
-from utils.cryptography import generate_secret_key
+from src.utils.cryptography import generate_secret_key
 
 
 # Config loaders

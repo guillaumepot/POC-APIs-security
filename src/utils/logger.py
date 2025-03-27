@@ -7,7 +7,7 @@ import os
 
 
 
-from config.config import LOGGER_CONFIG
+from src.config.config import LOGGER_CONFIG
 
 class LoggerManager:
     @staticmethod

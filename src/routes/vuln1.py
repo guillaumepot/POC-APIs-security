@@ -4,9 +4,9 @@
 # Lib
 from fastapi import APIRouter, HTTPException, Depends
 
-from config.config import DB_NAME
-from utils.sqlite_engine import SqliteEngine
-from utils.security_functions import get_current_user
+from src.config.config import DB_NAME
+from src.utils.sqlite_engine import SqliteEngine
+from src.utils.security_functions import get_current_user
 
 
 
