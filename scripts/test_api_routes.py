@@ -49,6 +49,16 @@ routes_to_test = [
 
 
 
+def check_api_status():
+    try:
+        response = requests.get(url=API_BASE_URL + "/", headers={'accept': 'application/json'})
+        if response.status_code != 200:
+            raise SystemExit(f"API is not running. Status code: {response.status_code}")
+        else:
+            print(f"{response.status_code}: API is running, starting tests...")
+    except requests.exceptions.RequestException as e:
+        raise SystemExit(f"Failed to connect to the API: {e}")
+
 
 def test_route(url=API_BASE_URL, route="/", method="GET", headers=None, data=None):
     if method == "GET":
@@ -66,6 +76,9 @@ def test_route(url=API_BASE_URL, route="/", method="GET", headers=None, data=Non
 
 
 if __name__ == "__main__":
+
+    check_api_status()
+
     with open("./logs/script_test_api.log", "w") as file:
         file.write("Testing routes:\n")
 
@@ -86,3 +99,5 @@ if __name__ == "__main__":
 
             file.write(f"{route['route']} \n")
             file.write(f"{str(response)} \n\n")
+
+    print("Tests completed. Check logs/script_test_api.log for results.")

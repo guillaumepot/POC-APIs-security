@@ -107,11 +107,15 @@ Create uv environment and install the requirements:
     API_HOST='localhost'
     API_PORT=8000
    ```
-4. Start server
+4. [Optional] You can (re)generate the mock database 'database.db' and the test_api logs
+   ```sh
+  uv run ./scripts/generate_example_database.py
+   ```
+5. Start server
    ```sh
    uv run main.py
    ```
-4. Log in using these account to test
+6. Log in using these account to test
    ```sh
    admin:admin
    John Doe:johndoe
@@ -134,7 +138,7 @@ Create uv environment and install the requirements:
 ## Roadmap
 
 - [X] API1:2023 - Broken Object Level Authorization
-- [ ] API2:2023 - Broken Authentication
+- [X] API2:2023 - Broken Authentication
 - [ ] API3:2023 - Broken Object Property Level Authorization
 - [ ] API4:2023 - Unrestricted Resource Consumption
 - [ ] API5:2023 - Broken Function Level Authorization

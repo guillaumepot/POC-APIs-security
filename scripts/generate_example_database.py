@@ -1,12 +1,12 @@
 #scripts/generate_example_database.py
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
-from config.config import DB_NAME, EXAMPLE_TABLES, EXAMPLE_DATA
-from utils.logger import LoggerManager
-from utils.sqlite_engine import SqliteEngine
+from src.config.config import DB_NAME, EXAMPLE_TABLES, EXAMPLE_DATA
+from src.utils.logger import LoggerManager
+from src.utils.sqlite_engine import SqliteEngine
 
 
 logger = LoggerManager.configure_logger(name='script', verbose=False)
