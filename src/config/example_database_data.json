@@ -1,0 +1,102 @@
+{
+    "roles": [
+        {
+            "id": 1,
+            "role_name": "collaborator"
+        },
+        {
+            "id": 2,
+            "role_name": "manager"
+        },
+        {
+            "id": 9,
+            "role_name": "admin"
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "firstname": "admin",
+            "lastname": "admin",
+            "username": "admin",
+            "email": "admin@apisec.com",
+            "phone": "555-555-001",
+            "department": "administration",
+            "manager": null,
+            "annual_salary": null,
+            "password": "admin",
+            "created_at": "2025-03-20",
+            "role": 9
+        },
+        {
+            "id": 2,
+            "firstname": "John",
+            "lastname": "Doe",
+            "username": "john_doe",
+            "email": "john_doe@apisec.com",
+            "phone": "555-555-002",
+            "department": "marketing",
+            "manager_id": null,
+            "annual_salary": 35000,
+            "password": "johndoe",
+            "created_at": "2025-03-20",
+            "role": 1
+        },
+        {
+            "id": 3,
+            "firstname": "Richard",
+            "lastname": "Gold",
+            "username": "richard_gold",
+            "email": "richard_gold@apisec.com",
+            "phone": "555-555-003",
+            "department": "marketing",
+            "manager_id": 6,
+            "annual_salary": 36000,
+            "password": "richardgold",
+            "created_at": "2025-03-20",
+            "role": 1
+        },
+        {
+            "id": 4,
+            "firstname": "Jeanne",
+            "lastname": "Silver",
+            "username": "jeanne_silver",
+            "email": "jeanne_silver@apisec.com",
+            "phone": "555-555-004",
+            "department": "IT",
+            "manager_id": 5,
+            "annual_salary": 38000,
+            "password": "jeannesilver",
+            "created_at": "2025-03-20",
+            "role": 1
+        },
+        {
+            "id": 5,
+            "firstname": "Julian",
+            "lastname": "Sky",
+            "username": "julian_sky",
+            "email": "julian_sky@apisec.com",
+            "phone": "555-555-005",
+            "department": "IT",
+            "manager_id": null,
+            "annual_salary": 42000,
+            "password": "juliansky",
+            "created_at": "2025-03-20",
+            "role": 2
+        },
+        {
+            "id": 6,
+            "firstname": "Helen",
+            "lastname": "Moon",
+            "username": "helen_moon",
+            "email": "helen_moon@apisec.com",
+            "phone": "555-555-006",
+            "department": "marketing",
+            "manager_id": null,
+            "annual_salary": 40000,
+            "password": "helenmoon",
+            "created_at": "2025-03-20",
+            "role": 2
+        }
+    ]
+}

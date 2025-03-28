@@ -1,0 +1,55 @@
+# src/config/example_database_data.yaml
+tables:
+  - name: roles
+    columns:
+      - name: id
+        type: int
+        primary_key: true
+      - name: role_name
+        type: string
+  - name: users
+    columns:
+      - name: id
+        type: int
+        primary_key: true
+      - name: firstname
+        type: string
+      - name: lastname
+        type: string
+      - name: username
+        type: string
+      - name: email
+        type: string
+      - name: phone
+        type: string
+      - name: department
+        type: string
+      - name: manager_id
+        type: int
+      - name: annual_salary
+        type: float
+      - name: password
+        type: string
+      - name: created_at
+        type: datetime
+      - name: role
+        type: int
+        foreign_key:
+          table: roles
+          column: id
+  - name: activity
+    columns:
+      - name: id
+        type: int
+        primary_key: true
+      - name: user_id
+        foreign_key:
+          table: users
+          column: id
+        type: int
+      - name: activity
+        type: string
+      - name: date
+        type: datetime
+      - name: device
+        type: string

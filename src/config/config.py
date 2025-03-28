@@ -1,6 +1,7 @@
 #src/config/config.py
 
 from dotenv import load_dotenv
+import json
 import os
 import yaml
 
@@ -22,10 +23,12 @@ with open("./src/config/logger_config.yaml", "r") as f:
     LOGGER_CONFIG = yaml.safe_load(f)
 
 
-with open("./src/config/example_database_data.yaml", "r") as f:
+with open("./src/config/example_database_tables.yaml", "r") as f:
     DB_PRECONFIG = yaml.safe_load(f)
     EXAMPLE_TABLES = DB_PRECONFIG['tables']
-    EXAMPLE_DATA = DB_PRECONFIG['data']
+
+with open("./src/config/example_database_data.json", "r") as f:
+    EXAMPLE_DATA = json.load(f)
 
 
 # LOGIN Config
