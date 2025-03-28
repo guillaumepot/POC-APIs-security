@@ -92,4 +92,3 @@ class SqliteEngine():
         else:
             self.logger.info(f"Executed query: {query} with parameters: {params}")
             return result
-

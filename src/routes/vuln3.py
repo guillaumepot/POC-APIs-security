@@ -2,10 +2,11 @@
 # Broken Object Property Level Authorization
 
 # Lib
+from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException
 
 from src.config.config import DB_NAME
-from src.config.data_models import BrokenUserModel, FixeduserModel
+from src.config.data_models import BrokenUserModel, FixedUserModel
 from src.utils.security_functions import get_current_user
 from src.utils.sqlite_engine import SqliteEngine
 
@@ -70,23 +71,38 @@ def get_user_activity_fix(activity: str, current_user: dict = Depends(get_curren
 
 
 @vulnerability3.post("/vuln3/broken/register", tags=["Vuln III"])
-def broken_register(user_data:BrokenUserModel) -> dict:
+def broken_register(user_data: BrokenUserModel) -> dict:
+    values_to_insert = user_data.to_db_values()
+    # return {'info': values_to_insert}
 
-    # try:
-    #     SqliteEngine(DB_NAME).connect()
-    #     SqliteEngine(DB_NAME).insert("users")
-    # except ValueError:
-    #     raise HTTPException(status_code=500, detail="Database error")
-    # else:
-    #     return {"info": f"Successfully registred {user_data.username}"}
-    # finally:
-    #     SqliteEngine(DB_NAME).close()
+    try:
+        SqliteEngine(DB_NAME).connect()
+        last_id = SqliteEngine(DB_NAME).select("SELECT id FROM users ORDER BY id DESC LIMIT 1")
+        id = int(last_id[0][0]) + 1
+        values_to_insert.insert(0, id)
+        SqliteEngine(DB_NAME).insert("users", values_to_insert)
+    except ValueError:
+        raise HTTPException(status_code=500, detail="Database error")
+    else:
+        return {"info": f"Successfully registred {values_to_insert[3]}"}
+    finally:
+        SqliteEngine(DB_NAME).close()
+
 
 
 @vulnerability3.post("/vuln3/fixed/register", tags=["Vuln III"])
-def fixed_register():
-    pass
+def fixed_register(user_data: FixedUserModel):
+    values_to_insert = user_data.to_db_values()
 
-
-# - Créer la route /register broken (permet de forcer le role à admin)
-# - Créer la route /register fixed (empêche la modification de role)
+    try:
+        SqliteEngine(DB_NAME).connect()
+        last_id = SqliteEngine(DB_NAME).select("SELECT id FROM users ORDER BY id DESC LIMIT 1")
+        id = int(last_id[0][0]) + 1
+        values_to_insert.insert(0, id)
+        SqliteEngine(DB_NAME).insert("users", values_to_insert)
+    except ValueError:
+        raise HTTPException(status_code=500, detail="Database error")
+    else:
+        return {"info": f"Successfully registred {values_to_insert[3]}"}
+    finally:
+        SqliteEngine(DB_NAME).close()

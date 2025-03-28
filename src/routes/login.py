@@ -23,7 +23,7 @@ authenticator = APIRouter()
 @authenticator.post("/login", tags=["Utils"])
 def login(credentials: OAuth2PasswordRequestForm = Depends()):
     # Get users
-    query = "SELECT id, name, password, role from users WHERE name = ?"
+    query = "SELECT id, username, password, role from users WHERE username = ?"
     try:
         SqliteEngine(DB_NAME).connect()
         response = SqliteEngine(DB_NAME).select(query, (credentials.username,))

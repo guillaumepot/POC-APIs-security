@@ -103,7 +103,7 @@ Create uv environment and install the requirements:
    ```
 3. Generate .env in ./src/config, add the following content
    ```sh
-    DB_NAME='./database/example_database.db'
+    DB_NAME='./database/database.db'
     API_HOST='localhost'
     API_PORT=8000
    ```

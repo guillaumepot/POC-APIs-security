@@ -5,7 +5,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
 from datetime import datetime, timedelta
-import json
 import random
 
 from src.config.config import DB_NAME, EXAMPLE_TABLES, EXAMPLE_DATA
