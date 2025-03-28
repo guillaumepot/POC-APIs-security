@@ -52,7 +52,20 @@ class SqliteEngine():
         except sqlite3.Error as e:
             self.logger.error(f"Error creating table {table_name}: {e}")
             raise e
-            
+        
+
+    def drop_table(self, table_name: str):
+        try:
+            self.cursor.execute(f'DROP TABLE IF EXISTS "{table_name}"')
+            self.logger.info(f"Table {table_name} deleted.")
+        except ValueError as ve:
+            self.logger.error(f"Error deleting table {table_name}: {ve}")
+            raise ve
+        except sqlite3.Error as e:
+            self.logger.error(f"Error deleting table {table_name}: {e}")
+            raise e
+
+
 
     def show_tables(self):
         self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")

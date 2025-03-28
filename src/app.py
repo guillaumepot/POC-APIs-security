@@ -7,6 +7,7 @@ from src.config.config import api_tags
 from src.routes.login import authenticator
 from src.routes.vuln1 import vulnerability1
 from src.routes.vuln2 import vulnerability2
+from src.routes.vuln3 import vulnerability3
 
 """
 API Declaration
@@ -31,4 +32,5 @@ OWASP vuln routers
 """
 app.include_router(vulnerability1, tags=["Vuln I"])
 app.include_router(vulnerability2, tags=["Vuln II"])
+app.include_router(vulnerability3, tags=["Vuln III"])
 app.include_router(authenticator, tags=["Utils"])
