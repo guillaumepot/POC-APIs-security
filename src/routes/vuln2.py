@@ -22,7 +22,7 @@ Routes Declaration
 @vulnerability2.post("/vuln2/broken/login", tags=["Vuln II"])
 def broken_login(username: str, password: str):
     # Get users
-    query = "SELECT id, name, role from users WHERE name = ?"
+    query = "SELECT id, username, role from users WHERE username = ?"
     try:
         SqliteEngine(DB_NAME).connect()
         response = SqliteEngine(DB_NAME).select(query, (username,))

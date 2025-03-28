@@ -3,15 +3,17 @@ tables:
   - name: roles
     columns:
       - name: id
-        type: int
+        type: INTEGER
         primary_key: true
+        autoincrement: true
       - name: role_name
         type: string
   - name: users
     columns:
       - name: id
-        type: int
+        type: INTEGER
         primary_key: true
+        autoincrement: true
       - name: firstname
         type: string
       - name: lastname
@@ -40,8 +42,9 @@ tables:
   - name: activity
     columns:
       - name: id
-        type: int
+        type: INTEGER
         primary_key: true
+        autoincrement: true
       - name: user_id
         foreign_key:
           table: users
