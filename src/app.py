@@ -13,6 +13,8 @@ from src.routes.vuln3 import vulnerability3
 from src.routes.vuln4 import vulnerability4
 from src.routes.vuln5 import vulnerability5
 from src.routes.vuln6 import vulnerability6
+from src.routes.vuln7 import vulnerability7
+
 from src.utils.rate_limiter import rate_limiter
 
 
@@ -47,14 +49,14 @@ app.include_router(vulnerability3, tags=["Vuln III"])
 app.include_router(vulnerability4, tags=["Vuln IV"])
 app.include_router(vulnerability5, tags=["Vuln V"])
 app.include_router(vulnerability6, tags=["Vuln VI"])
-
+app.include_router(vulnerability7, tags=["Vuln VII"])
 app.include_router(authenticator, tags=["Utils"])
 
 
 """
 Utils
 """
-# Rate limiter (used for vuln IV)
+# Rate limiter (used for vuln IV & VI)
 app.state.limiter = rate_limiter
 app.add_exception_handler(RateLimitExceeded, lambda request, exc: JSONResponse(
     status_code=429,
