@@ -7,12 +7,35 @@ import requests
 API_BASE_URL = "http://localhost:8000"
 
 
+broken_register_data = {
+                        "firstname": "Louis",
+                        "lastname": "Armstrong",
+                        "email": "louis_armstrong@apisec.com",
+                        "phone": "555-555-666",
+                        "password": "louis_armstrong",
+                        "department": "Hacker",
+                        "annual_salary": 9999999,
+                        "role": 9
+                        }
+
+
+fixed_register_data = {
+                        "firstname": "Neil",
+                        "lastname": "Armstrong",
+                        "email": "neil_armstrong@apisec.com",
+                        "phone": "555-555-600",
+                        "password": "Ne1l_4rmstrong!"
+                      }
+
+
+
+
 routes_to_test = [
                 # Utils
                 {'route': '/login',
                 'method': 'POST',
                 'headers': {'accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded'},
-                'data': 'grant_type=password&username=John%20Doe&password=johndoe'},
+                'data': 'grant_type=password&username=john_doe&password=johndoe'},
 
                 {'route': '/read_payload',
                 'method': 'GET',
@@ -45,6 +68,64 @@ routes_to_test = [
                 'method': 'POST',
                 'headers': {'accept': 'application/json', 'Authorization': None},
                 'data': None},
+
+                # Vuln 3
+                {'route': '/vuln3/broken/activity?activity=log%20in',
+                'method': 'GET',
+                'headers': {'accept': 'application/json', 'Authorization': None},
+                'data': None},
+
+                {'route': '/vuln3/fixed/activity?activity=log%20in',
+                'method': 'GET',
+                'headers': {'accept': 'application/json', 'Authorization': None},
+                'data': None},
+
+                {'route': '/vuln3/broken/register',
+                'method': 'POST',
+                'headers': {'accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': None},
+                'data': broken_register_data},
+
+                {'route': '/vuln3/fixed/register',
+                'method': 'POST',
+                'headers': {'accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': None},
+                'data': fixed_register_data},
+
+
+                # Vuln 4
+                {'route': '/vuln4/broken/limited_route',
+                'method': 'GET',
+                'headers': {'accept': 'application/json', 'Authorization': None},
+                'data': None},
+
+                {'route': '/vuln4/fixed/limited_route',
+                'method': 'GET',
+                'headers': {'accept': 'application/json', 'Authorization': None},
+                'data': None},
+
+
+                # Vuln 5
+                {'route': '/vuln5/broken/limited_to_admin',
+                'method': 'GET',
+                'headers': {'accept': 'application/json', 'Authorization': None},
+                'data': None},
+
+                {'route': '/vuln5/fixed/limited_to_admin',
+                'method': 'GET',
+                'headers': {'accept': 'application/json', 'Authorization': None},
+                'data': None},
+
+
+                # Vuln 6
+                {'route': '/vuln6/broken/route_to_spam',
+                'method': 'GET',
+                'headers': {'accept': 'application/json', 'Authorization': None},
+                'data': None},
+
+                {'route': '/vuln6/fixed/route_to_spam',
+                'method': 'GET',
+                'headers': {'accept': 'application/json', 'Authorization': None},
+                'data': None},
+
                 ]
 
 
