@@ -41,12 +41,12 @@ def encode_jwt(payload_to_encode: dict) -> str:
 
 
 # Decorators
-def require_role(role: int):
+def require_role(roles: list):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
             user_data = kwargs.get("current_user")
-            if not user_data or user_data.get("role") != role:
+            if not user_data or user_data.get("role") not in roles:
                 raise HTTPException(status_code=401, detail="Not authorized")
             return func(*args, **kwargs)
         return wrapper

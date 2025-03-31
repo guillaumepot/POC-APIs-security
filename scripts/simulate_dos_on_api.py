@@ -10,7 +10,9 @@ import requests
 BASE_URL = "http://localhost:8000"
 BROKEN_ROUTE = f"{BASE_URL}/vuln4/broken/limited_route"
 FIXED_ROUTE = f"{BASE_URL}/vuln4/fixed/limited_route"
-NUM_REQUESTS = 5000
+
+
+NUM_REQUESTS = 200
 
 def send_request(url):
     try:
@@ -27,10 +29,10 @@ def test_route(route, label):
     rate_limited_count = 0
     
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-        # Utilisation de tqdm pour afficher la progression
         results = list(tqdm(executor.map(send_request, [route] * NUM_REQUESTS), total=NUM_REQUESTS, desc=label))
 
     for status, _ in results:
+        print(status)
         if status == 200:
             success_count += 1
         elif status == 429:
