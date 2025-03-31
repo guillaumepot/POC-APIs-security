@@ -13,6 +13,7 @@ dependencies = [
     "python-dotenv>=1.0.1",
     "python-multipart>=0.0.20",
     "pyyaml>=6.0.2",
+    "slowapi>=0.1.9",
     "uvicorn>=0.34.0",
 ]
 
@@ -21,4 +22,5 @@ dev = [
     "gittyleaks>=0.0.31",
     "requests>=2.32.3",
     "ruff>=0.11.2",
+    "tqdm>=4.67.1",
 ]
