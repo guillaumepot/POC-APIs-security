@@ -2,7 +2,6 @@
 # Broken Object Property Level Authorization
 
 # Lib
-from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException
 
 from src.config.config import DB_NAME
