@@ -91,31 +91,40 @@ Create uv environment and install the requirements:
     curl -LsSf https://astral.sh/uv/install.sh | sh
   ```
 
+* [optional] site_key & secret_key from hcaptcha to enable captcha route
+```
+Generate keys from https://www.hcaptcha.com/ and replace 'changeme' values in .env with your keys. Keep these keys secret !
+```
+
 ### Installation
 
-1. Clone the repo
+**1. Clone the repo**
    ```sh
    git clone https://github.com/guillaumepot/POC-APIs-security.git
    ```
-2. Setup venv
+**2. Setup venv**
    ```sh
    uv sync
    ```
-3. Generate .env in ./src/config, add the following content
-   ```sh
+**3. Generate .env in ./src/config, add the following content** 
+  ```sh
     DB_NAME='./database/database.db'
     API_HOST='localhost'
     API_PORT=8000
+    HTML_TEMPLATES_DIR='./src/templates'
+    CAPTCHA_VERIFY_URL='https://hcaptcha.com/siteverify'
+    CAPTCHA_SITE_KEY='changeme'
+    CAPTCHA_SECRET = 'changeme'
    ```
-4. [Optional] You can (re)generate the mock database 'database.db' and the test_api logs
+**4. [Optional] You can (re)generate the mock database 'database.db' and the test_api logs**
    ```sh
-  uv run ./scripts/generate_example_database.py
+    uv run ./scripts/generate_example_database.py
    ```
-5. Start server
+**5. Start server**
    ```sh
-   uv run main.py
+    uv run main.py
    ```
-6. Log in using these account to test
+**6. Log in using these account to test**
    ```sh
    admin:admin
    John Doe:johndoe
@@ -139,8 +148,8 @@ Create uv environment and install the requirements:
 
 - [X] API1:2023 - Broken Object Level Authorization
 - [X] API2:2023 - Broken Authentication
-- [ ] API3:2023 - Broken Object Property Level Authorization
-- [ ] API4:2023 - Unrestricted Resource Consumption
+- [X] API3:2023 - Broken Object Property Level Authorization
+- [X] API4:2023 - Unrestricted Resource Consumption
 - [ ] API5:2023 - Broken Function Level Authorization
 - [ ] API6:2023 - Unrestricted Access to Sensitive Business Flows
 - [ ] API7:2023 - Server Side Request Forgery

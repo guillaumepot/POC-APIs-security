@@ -1,6 +1,7 @@
 #src/config/config.py
 
 from dotenv import load_dotenv
+from fastapi.templating import Jinja2Templates
 import json
 import os
 import yaml
@@ -18,6 +19,11 @@ load_dotenv(dotenv_path='./src/config/.env',
 DB_NAME = os.getenv("DB_NAME")
 API_HOST = os.getenv("API_HOST")
 API_PORT = int(os.getenv("API_PORT"))
+
+HTML_TEMPLATES_DIR = Jinja2Templates(directory=os.getenv('HTML_TEMPLATES_DIR'))
+CAPTCHA_VERIFY_URL = os.getenv("CAPTCHA_VERIFY_URL")
+CAPTCHA_SITE_KEY = os.getenv("CAPTCHA_SITE_KEY")
+CAPTCHA_SECRET = os.getenv('CAPTCHA_SECRET')
 
 with open("./src/config/logger_config.yaml", "r") as f:
     LOGGER_CONFIG = yaml.safe_load(f)
