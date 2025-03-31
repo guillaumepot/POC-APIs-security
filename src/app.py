@@ -11,6 +11,7 @@ from src.routes.vuln1 import vulnerability1
 from src.routes.vuln2 import vulnerability2
 from src.routes.vuln3 import vulnerability3
 from src.routes.vuln4 import vulnerability4
+from src.routes.vuln5 import vulnerability5
 from src.utils.rate_limiter import rate_limiter
 
 
@@ -25,10 +26,14 @@ app = FastAPI(
     debug=True,
 )
 
+"""
+Routes
+"""
 
 @app.get("/", tags=["Utils"])
 def hello() -> None:
     return {"info": "Go to swagger UI using /docs route"}
+
 
 
 
@@ -39,6 +44,7 @@ app.include_router(vulnerability1, tags=["Vuln I"])
 app.include_router(vulnerability2, tags=["Vuln II"])
 app.include_router(vulnerability3, tags=["Vuln III"])
 app.include_router(vulnerability4, tags=["Vuln IV"])
+app.include_router(vulnerability5, tags=["Vuln V"])
 app.include_router(authenticator, tags=["Utils"])
 
 

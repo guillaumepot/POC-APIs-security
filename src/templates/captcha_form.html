@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPTCHA Protected Route</title>
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
+</head>
+<body>
+    <h2>Access Protected API</h2>
+    <form id="captcha-form" onsubmit="return onSubmit(event)">
+        <div class="h-captcha" data-sitekey="{{ site_key }}"></div>
+        <br>
+        <button type="submit">Submit Request</button>
+    </form>
+
+    <script>
+        function onSubmit(event) {
+            event.preventDefault();  // Prevent form submission until we validate the CAPTCHA
+    
+            var captchaToken = document.querySelector('[name="h-captcha-response"]').value;
+            
+            if (!captchaToken) {
+                alert("Please complete the CAPTCHA.");
+                return false;  // Ensure form doesn't submit without CAPTCHA token
+            }
+    
+            // Reset the CAPTCHA widget after submitting
+            hcaptcha.reset();
+    
+            fetch("/vuln4/fixed/captcha_route", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: new URLSearchParams({ "captcha_token": captchaToken })
+            })
+            .then(response => response.text())  // Handle as text because the response is an HTML page
+            .then(data => {
+                // Show the HTML page returned as a success message
+                document.body.innerHTML = data;  // Replace current page with the response content
+            })
+            .catch(error => {
+                alert("Error: " + error);
+            });
+    
+            return false;  // Prevent the form from being submitted traditionally
+        }
+    </script>
+    
+</body>
+</html>
