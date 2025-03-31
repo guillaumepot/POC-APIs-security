@@ -3,17 +3,19 @@
 
 # Lib
 from datetime import datetime, timedelta
-from fastapi import Depends
+from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
+from functools import wraps
 import jwt
 
 from src.config.config import SECRET_KEY, ALGORITHM, JWT_EXPIRE
 
-
+# Var
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
 
 
 
+# Functions
 def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
@@ -36,3 +38,16 @@ def encode_jwt(payload_to_encode: dict) -> str:
                              json_encoder = None)
 
     return encoded_jwt
+
+
+# Decorators
+def require_role(role: int):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            user_data = kwargs.get("current_user")
+            if not user_data or user_data.get("role") != role:
+                raise HTTPException(status_code=401, detail="Not authorized")
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
