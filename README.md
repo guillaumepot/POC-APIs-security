@@ -151,8 +151,8 @@ Generate keys from https://www.hcaptcha.com/ and replace 'changeme' values in .e
 - [X] API3:2023 - Broken Object Property Level Authorization
 - [X] API4:2023 - Unrestricted Resource Consumption
 - [X] API5:2023 - Broken Function Level Authorization
-- [ ] API6:2023 - Unrestricted Access to Sensitive Business Flows
-- [ ] API7:2023 - Server Side Request Forgery
+- [X] API6:2023 - Unrestricted Access to Sensitive Business Flows
+- [X] API7:2023 - Server Side Request Forgery
 - [ ] API8:2023 - Security Misconfiguration
 - [ ] API9:2023 - Improper Inventory Management
 - [ ] API10:2023 - Unsafe Consumption of APIs

@@ -25,6 +25,9 @@ CAPTCHA_VERIFY_URL = os.getenv("CAPTCHA_VERIFY_URL")
 CAPTCHA_SITE_KEY = os.getenv("CAPTCHA_SITE_KEY")
 CAPTCHA_SECRET = os.getenv('CAPTCHA_SECRET')
 
+ALLOWED_DOMAINS = ("example.com", "perdu.com")
+
+
 with open("./src/config/logger_config.yaml", "r") as f:
     LOGGER_CONFIG = yaml.safe_load(f)
 

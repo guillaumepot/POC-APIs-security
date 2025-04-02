@@ -6,7 +6,9 @@ from datetime import datetime, timedelta
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from functools import wraps
+import ipaddress
 import jwt
+from urllib.parse import urlparse
 
 from src.config.config import SECRET_KEY, ALGORITHM, JWT_EXPIRE
 
@@ -38,6 +40,8 @@ def encode_jwt(payload_to_encode: dict) -> str:
                              json_encoder = None)
 
     return encoded_jwt
+
+
 
 
 # Decorators
