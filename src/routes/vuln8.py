@@ -2,11 +2,11 @@
 # Security Misconfiguration
 
 # Lib
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.responses import PlainTextResponse
 
 from src.config.config import LOGS_FILEPATH
-from src.utils.security_functions import sanitize_logs
+from src.utils.security_functions import sanitize_logs, get_current_user, require_role
 
 
 """
@@ -26,7 +26,8 @@ def broken_logs():
 
 
 @vulnerability8.get("/vuln8/fixed/logs", tags=["Vuln VIII"])
-def fixed_logs():
+@require_role(roles=[9])
+def fixed_logs(current_user: dict = Depends(get_current_user)):
     with open(LOGS_FILEPATH, 'r') as file:
         logs = file.readlines()
 
