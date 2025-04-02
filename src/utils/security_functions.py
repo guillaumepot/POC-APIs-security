@@ -2,13 +2,14 @@
 
 
 # Lib
+from collections import Counter
 from datetime import datetime, timedelta
 from fastapi import Depends, HTTPException
+from fastapi.responses import JSONResponse
 from fastapi.security import OAuth2PasswordBearer
 from functools import wraps
-import ipaddress
 import jwt
-from urllib.parse import urlparse
+import re
 
 from src.config.config import SECRET_KEY, ALGORITHM, JWT_EXPIRE
 
@@ -40,6 +41,58 @@ def encode_jwt(payload_to_encode: dict) -> str:
                              json_encoder = None)
 
     return encoded_jwt
+
+
+
+
+def sanitize_logs(logs:str):
+    status_codes = Counter()
+    error_details = []
+
+    status_code_pattern = re.compile(r"Response status: (\d{3})")
+    request_pattern = re.compile(r"Request: (GET|POST|PUT|DELETE) (http[^\s]+)")
+    from_pattern = re.compile(r"from ([\d\.]+)")
+    headers_pattern = re.compile(r"Headers: (.+)")
+    body_pattern = re.compile(r"body:\s*(.*)")
+
+
+    request_url = None
+    request_from = None
+    request_headers = None
+    request_body = None
+
+
+    for line in logs:
+        if request_pattern.search(line):
+            request_url = request_pattern.search(line).group(2)
+        if from_pattern.search(line):
+            request_from = from_pattern.search(line).group(1)
+        if headers_pattern.search(line):
+            request_headers = headers_pattern.search(line).group(1)
+        if body_pattern.search(line):
+            request_body = body_pattern.search(line).group(1)
+        
+        status_match = status_code_pattern.search(line)
+
+
+        if status_match:
+            status_code = status_match.group(1)
+            status_codes[status_code] += 1
+            
+            if status_code != "200":
+                error_details.append({
+                    "status_code": status_code,
+                    "url": request_url,
+                    "from": request_from,
+                    "headers": request_headers,
+                    "body": request_body
+                })
+
+
+    return JSONResponse(content={
+        "status_codes": dict(status_codes),
+        "errors": error_details
+    })
 
 
 

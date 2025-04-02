@@ -14,7 +14,10 @@ from src.routes.vuln4 import vulnerability4
 from src.routes.vuln5 import vulnerability5
 from src.routes.vuln6 import vulnerability6
 from src.routes.vuln7 import vulnerability7
-
+from src.routes.vuln8 import vulnerability8
+from src.routes.vuln9 import vulnerability9
+from src.routes.vuln10 import vulnerability10
+from src.utils.logger import ApiLogger
 from src.utils.rate_limiter import rate_limiter
 
 
@@ -50,6 +53,9 @@ app.include_router(vulnerability4, tags=["Vuln IV"])
 app.include_router(vulnerability5, tags=["Vuln V"])
 app.include_router(vulnerability6, tags=["Vuln VI"])
 app.include_router(vulnerability7, tags=["Vuln VII"])
+app.include_router(vulnerability8, tags=["Vuln VIII"])
+app.include_router(vulnerability9, tags=["Vuln IX"])
+app.include_router(vulnerability10, tags=["Vuln X"])
 app.include_router(authenticator, tags=["Utils"])
 
 
@@ -62,3 +68,7 @@ app.add_exception_handler(RateLimitExceeded, lambda request, exc: JSONResponse(
     status_code=429,
     content={"detail": f"Rate limit exceeded. Rate: {exc.detail}"}
 ))
+
+
+# Logger
+app.add_middleware(ApiLogger)
