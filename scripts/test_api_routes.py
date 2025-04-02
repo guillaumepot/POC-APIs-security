@@ -126,6 +126,54 @@ routes_to_test = [
                 'headers': {'accept': 'application/json', 'Authorization': None},
                 'data': None},
 
+
+                # Vuln 7
+                {'route': '/vuln7/broken/fetch',
+                'method': 'GET',
+                'headers': {'accept': 'application/json', 'Authorization': None},
+                'data': 'url=example.com'},
+
+                {'route': '/vuln7/fixed/fetch',
+                'method': 'GET',
+                'headers': {'accept': 'application/json', 'Authorization': None},
+                'data': 'url=example.com'},
+
+
+                # Vuln 8
+                {'route': '/vuln8/broken/logs',
+                'method': 'GET',
+                'headers': {'accept': 'text/plain', 'Authorization': None},
+                'data': None},
+
+                {'route': '/vuln8/fixed/logs',
+                'method': 'GET',
+                'headers': {'accept': 'text/plain', 'Authorization': None},
+                'data': None},
+
+
+                # Vuln 9
+                {'route': '/vuln9/beta/user_info',
+                'method': 'GET',
+                'headers': {'accept': 'application/json', 'Authorization': None},
+                'data': 'username=john_doe'},
+
+                {'route': '/vuln9/administration/user_info',
+                'method': 'GET',
+                'headers': {'accept': 'application/json', 'Authorization': None},
+                'data': 'username=john_doe'},
+
+
+                # Vuln 10
+                {'route': '/vuln10/broken/sql_query',
+                'method': 'GET',
+                'headers': {'accept': 'application/json', 'Authorization': None},
+                'data': 'username=OR 1=1;--'},
+
+                {'route': '/vuln9/administration/user_info',
+                'method': 'GET',
+                'headers': {'accept': 'application/json', 'Authorization': None},
+                'data': 'username=OR 1=1;--'},
+
                 ]
 
 
