@@ -30,7 +30,7 @@ def login(credentials: OAuth2PasswordRequestForm = Depends()):
     finally:
         SqliteEngine(DB_NAME).close()
 
-    # Check if user exists
+    # Check if password is correct
     if not response or not verify_hash(
         to_verify=credentials.password, hashed_value=response[0][2]
     ):
