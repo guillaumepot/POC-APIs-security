@@ -1,226 +1,356 @@
-# POC-APIs-security
+# POC - OWASP 2023 Top 10 API Security Vulnerabilities
 
-
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
-<a id="readme-top"></a>
-
-
-<!-- PROJECT LOGO -->
-<br />
 <div align="center">
-  <a href="https://github.com/guillaumepot/POC-APIs-security">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
-<h3 align="center">POC - OWASP 2023 - Top 10 API vulnerabilities</h3>
-
-  <p align="center">
-    POC - OWASP top 10 API vulnerabilities - 2023
-    <br />
-    <a href="https://github.com/guillaumepot/POC-APIs-security"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/guillaumepot/POC-APIs-security/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    &middot;
-    <a href="https://github.com/guillaumepot/POC-APIs-security/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  <h3>🔐 Educational API Security Demonstration</h3>
+  <p>
+    A comprehensive FastAPI-based proof of concept demonstrating all 10 OWASP API Security Top 10 (2023) vulnerabilities with both vulnerable and secure implementations for educational purposes.
   </p>
+  
+  [![OWASP 2023 Top10 API vulnerabilities](https://img.shields.io/badge/OWASP-2023_Top10_API_vulnerabilities-blue)](https://owasp.org/API-Security/editions/2023/en/0x11-t10/)
+  [![Python](https://img.shields.io/badge/python-v3.13.2+-blue.svg)](https://www.python.org/)
+  [![FastAPI](https://img.shields.io/badge/FastAPI-0.115.12+-green.svg)](https://fastapi.tiangolo.com/)
+  [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 </div>
 
+---
 
+## 📋 Table of Contents
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+- [About The Project](#about-the-project)
+- [OWASP API Security Top 10 Coverage](#owasp-api-security-top-10-coverage)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
+- [Usage](#usage)
+  - [Starting the Server](#starting-the-server)
+  - [API Documentation](#api-documentation)
+  - [Test Accounts](#test-accounts)
+- [API Endpoints](#api-endpoints)
+- [Project Structure](#project-structure)
+- [Testing](#testing)
+- [Security Features](#security-features)
+- [Development](#development)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
+---
 
+## 🎯 About The Project
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+This project is an educational demonstration of the **OWASP API Security Top 10 (2023)** vulnerabilities. It provides:
 
-[![Product Name Screen Shot][product-screenshot]](https://owasp.org/API-Security/editions/2023/en/images/cover.jpg)
-Secure your APIs, OWASP top 10 API vulnerabilities - 2023
+- **Vulnerable endpoints** that demonstrate each of the 10 API security risks
+- **Secure counterparts** showing proper implementation and mitigation techniques
+- **Complete documentation** of each vulnerability with examples
+- **Testing scripts** to verify vulnerabilities and their fixes
+- **Real-world scenarios** that developers commonly encounter
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+**⚠️ Warning**: This application contains intentionally vulnerable code for educational purposes. **Never deploy this in a production environment**.
 
+## 🔥 OWASP API Security Top 10 Coverage
 
+| Vulnerability | Status | Description |
+|---------------|---------|-------------|
+| **API1:2023** | ✅ | Broken Object Level Authorization (BOLA) |
+| **API2:2023** | ✅ | Broken Authentication |
+| **API3:2023** | ✅ | Broken Object Property Level Authorization |
+| **API4:2023** | ✅ | Unrestricted Resource Consumption |
+| **API5:2023** | ✅ | Broken Function Level Authorization |
+| **API6:2023** | ✅ | Unrestricted Access to Sensitive Business Flows |
+| **API7:2023** | ✅ | Server Side Request Forgery (SSRF) |
+| **API8:2023** | ✅ | Security Misconfiguration |
+| **API9:2023** | ✅ | Improper Inventory Management |
+| **API10:2023** | ✅ | Unsafe Consumption of APIs |
 
-### Built With
+Each vulnerability includes:
+- 🔴 **Broken implementation** (demonstrates the vulnerability)
+- 🟢 **Fixed implementation** (shows proper security measures)
 
-* [![Python][Python]](https://www.python.org/)
-* [![FastAPI][FastAPI]](https://fastapi.tiangolo.com/)
+## 🛠 Tech Stack
 
+- **Backend**: FastAPI (0.115.12+)
+- **Authentication**: JWT with PyJWT, Passlib, Argon2
+- **Database**: SQLite with custom ORM
+- **Security**: Rate limiting (SlowAPI), Input validation (Pydantic)
+- **Templates**: Jinja2
+- **Environment**: Python 3.13.2+
+- **Package Management**: UV
+- **Development**: Uvicorn (ASGI server)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-```
-Create uv environment and install the requirements:
-- uv sync
-```
+## 🚀 Getting Started
 
 ### Prerequisites
 
-* uv (https://docs.astral.sh/uv/getting-started/installation/#standalone-installer)
-  ```sh
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-  ```
+1. **UV Package Manager** (recommended):
+   ```bash
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
+   
+2. **Python 3.13.2+** (if not using UV):
+   ```bash
+   python --version  # Should be 3.13.2+
+   ```
 
-* [optional] site_key & secret_key from hcaptcha to enable captcha route
-```
-Generate keys from https://www.hcaptcha.com/ and replace 'changeme' values in .env with your keys. Keep these keys secret !
-```
+3. **[Optional] hCaptcha Keys** for captcha-protected routes:
+   - Get free keys from [hCaptcha](https://www.hcaptcha.com/)
 
 ### Installation
 
-**1. Clone the repo**
-   ```sh
+1. **Clone the repository**:
+   ```bash
    git clone https://github.com/guillaumepot/POC-APIs-security.git
+   cd POC-APIs-security
    ```
-**2. Setup venv**
-   ```sh
+
+2. **Set up the environment**:
+   ```bash
    uv sync
    ```
-**3. Generate .env in ./src/config, add the following content** 
-  ```sh
-    DB_NAME='./database/database.db'
-    API_HOST='localhost'
-    API_PORT=8000
-    HTML_TEMPLATES_DIR='./src/templates'
-    CAPTCHA_VERIFY_URL='https://hcaptcha.com/siteverify'
-    CAPTCHA_SITE_KEY='changeme'
-    CAPTCHA_SECRET = 'changeme'
-   ```
-**4. [Optional] You can (re)generate the mock database 'database.db' and the test_api logs**
-   ```sh
-    uv run ./scripts/generate_example_database.py
-   ```
-**5. Start server**
-   ```sh
-    uv run main.py
-   ```
-**6. Log in using these account to test**
-   ```sh
-   admin:admin
-   John Doe:johndoe
+
+3. **Create environment configuration**:
+   ```bash
+   # Create the config directory if it doesn't exist
+   mkdir -p src/config
+   
+   # Create .env file
+   cat > src/config/.env << EOF
+   DB_NAME='./database/database.db'
+   API_HOST='localhost'
+   API_PORT=8000
+   HTML_TEMPLATES_DIR='./src/templates'
+   CAPTCHA_VERIFY_URL='https://hcaptcha.com/siteverify'
+   CAPTCHA_SITE_KEY='changeme'
+   CAPTCHA_SECRET='changeme'
+   LOGS_FILEPATH='./logs/api.log'
+   EOF
    ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+4. **Generate sample database and logs**:
+   ```bash
+   uv run scripts/generate_example_database.py
+   ```
 
+### Configuration
 
+The application uses environment variables defined in `src/config/.env`:
 
-<!-- USAGE EXAMPLES -->
-## Usage
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `DB_NAME` | SQLite database path | `./database/database.db` |
+| `API_HOST` | Server host | `localhost` |
+| `API_PORT` | Server port | `8000` |
+| `HTML_TEMPLATES_DIR` | Templates directory | `./src/templates` |
+| `CAPTCHA_SITE_KEY` | hCaptcha site key | `changeme` |
+| `CAPTCHA_SECRET` | hCaptcha secret key | `changeme` |
+| `LOGS_FILEPATH` | API logs file path | `./logs/api.log` |
 
-[WIP]
+## 💻 Usage
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Starting the Server
 
+```bash
+# Start the development server
+uv run main.py
 
+# Or using uvicorn directly
+uv run uvicorn src.app:app --host localhost --port 8000 --reload
+```
 
-<!-- ROADMAP -->
-## Roadmap
+The API will be available at: `http://localhost:8000`
 
-- [X] API1:2023 - Broken Object Level Authorization
-- [X] API2:2023 - Broken Authentication
-- [X] API3:2023 - Broken Object Property Level Authorization
-- [X] API4:2023 - Unrestricted Resource Consumption
-- [X] API5:2023 - Broken Function Level Authorization
-- [X] API6:2023 - Unrestricted Access to Sensitive Business Flows
-- [X] API7:2023 - Server Side Request Forgery
-- [X] API8:2023 - Security Misconfiguration
-- [X] API9:2023 - Improper Inventory Management
-- [X] API10:2023 - Unsafe Consumption of APIs
+### API Documentation
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+- **Swagger UI**: `http://localhost:8000/docs`
+- **ReDoc**: `http://localhost:8000/redoc`
+- **OpenAPI JSON**: `http://localhost:8000/openapi.json`
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Test Accounts
 
+| Username | Password | Role | Description |
+|----------|----------|------|-------------|
+| `admin` | `admin` | Administrator | Full access to all endpoints |
+| `john_doe` | `johndoe` | Regular User | Limited access for testing BOLA |
 
+## 🔗 API Endpoints
 
-<!-- CONTRIBUTING -->
-## Contributing
+### Authentication
+- `POST /login` - User authentication (JWT token)
+- `GET /read_payload` - Decode JWT payload
+- `GET /jwt_secret_key` - [VULNERABLE] Expose JWT secret
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+### Vulnerability Demonstrations
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+#### API1 - Broken Object Level Authorization
+- `GET /vuln1/broken/collaborator/{id}` - 🔴 Access any user's data
+- `GET /vuln1/fixed/collaborator/{id}` - 🟢 Proper authorization checks
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+#### API2 - Broken Authentication  
+- `POST /vuln2/broken/login` - 🔴 Weak authentication
+- `POST /vuln2/fixed/login` - 🟢 Secure authentication
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+#### API3 - Broken Object Property Level Authorization
+- `GET /vuln3/broken/activity` - 🔴 Excessive data exposure
+- `POST /vuln3/broken/register` - 🔴 Mass assignment vulnerability
+- `GET /vuln3/fixed/activity` - 🟢 Filtered response data
+- `POST /vuln3/fixed/register` - 🟢 Input validation and filtering
 
+#### API4 - Unrestricted Resource Consumption
+- `GET /vuln4/broken/limited_route` - 🔴 No rate limiting
+- `GET /vuln4/fixed/limited_route` - 🟢 Rate limiting implemented
 
-### Top contributors:
+#### API5 - Broken Function Level Authorization
+- `GET /vuln5/broken/limited_to_admin` - 🔴 Missing role checks
+- `GET /vuln5/fixed/limited_to_admin` - 🟢 Proper role-based access
 
-<a href="https://github.com/guillaumepot/POC-APIs-security/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=guillaumepot/POC-APIs-security" alt="contrib.rocks image" />
-</a>
+#### API6 - Unrestricted Access to Sensitive Business Flows
+- `GET /vuln6/broken/route_to_spam` - 🔴 No business logic protection
+- `GET /vuln6/fixed/route_to_spam` - 🟢 Protected sensitive operations
 
+#### API7 - Server Side Request Forgery
+- `GET /vuln7/broken/fetch` - 🔴 Unvalidated external requests
+- `GET /vuln7/fixed/fetch` - 🟢 Domain whitelist validation
 
+#### API8 - Security Misconfiguration
+- `GET /vuln8/broken/logs` - 🔴 Sensitive information exposure
+- `GET /vuln8/fixed/logs` - 🟢 Secured endpoint with proper access control
 
-<!-- LICENSE -->
-## License
+#### API9 - Improper Inventory Management
+- `GET /vuln9/beta/user_info` - 🔴 Unversioned/test endpoint exposure
+- `GET /vuln9/administration/user_info` - 🟢 Properly managed endpoint
 
-Distributed under the GNU GENERAL PUBLIC LICENSE. See `LICENSE` for more information.
+#### API10 - Unsafe Consumption of APIs
+- `GET /vuln10/broken/sql_query` - 🔴 SQL injection via external API data
+- `GET /vuln10/fixed/sql_query` - 🟢 Parameterized queries and input validation
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## 📁 Project Structure
 
+```
+POC-APIs-security/
+├── src/
+│   ├── app.py                 # FastAPI application
+│   ├── config/
+│   │   ├── config.py          # Configuration management
+│   │   ├── .env               # Environment variables
+│   │   └── *.yaml, *.json     # Config files
+│   ├── routes/
+│   │   ├── login.py           # Authentication endpoints
+│   │   ├── vuln1.py           # OWASP API1 demonstrations
+│   │   ├── vuln2.py           # OWASP API2 demonstrations
+│   │   └── ...                # API3-API10 demonstrations
+│   ├── templates/             # Jinja2 HTML templates
+│   └── utils/
+│       ├── security_functions.py  # Security utilities
+│       ├── sqlite_engine.py       # Database operations
+│       ├── rate_limiter.py        # Rate limiting
+│       └── logger.py              # API logging
+├── scripts/
+│   ├── generate_example_database.py  # Database setup
+│   ├── test_api_routes.py           # API testing
+│   └── simulate_dos_on_api.py       # DoS testing
+├── database/
+│   └── database.db            # SQLite database
+├── logs/                      # Application logs
+├── main.py                    # Application entry point
+├── pyproject.toml            # Project dependencies
+└── README.md                 # This file
+```
 
+## 🧪 Testing
 
-<!-- CONTACT -->
-## Contact
+### Run API Tests
+```bash
+# Test all vulnerable and secure endpoints
+uv run scripts/test_api_routes.py
 
-Guillaume Pot
+# Simulate DoS attack (for API4 testing)
+uv run scripts/simulate_dos_on_api.py
+```
 
-[![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/062guillaumepot/)  
-[![Github Badge](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=GitHub%20Pages&logoColor=white)](https://github.com/guillaumepot)
+### Manual Testing
+1. Start the server: `uv run main.py`
+2. Open Swagger UI: `http://localhost:8000/docs`
+3. Use test accounts to authenticate
+4. Try both vulnerable and secure endpoints
+5. Observe the differences in behavior
 
+## 🔒 Security Features
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Implemented Security Measures
+- **JWT Authentication** with proper token validation
+- **Rate Limiting** using SlowAPI
+- **Input Validation** with Pydantic models
+- **SQL Injection Protection** with parameterized queries
+- **CORS Configuration** for cross-origin requests
+- **Password Hashing** using Argon2
+- **Role-Based Access Control** (RBAC)
+- **Request Logging** for audit trails
 
+### Security Testing Tools
+- Built-in testing scripts for all vulnerabilities
+- DoS simulation for rate limiting tests
+- JWT token manipulation examples
+- SQL injection test cases
 
+## 👨‍💻 Development
 
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+### Development Dependencies
+```bash
+uv sync --group dev
+```
 
-<!-- * []()
-* []()
-* []() -->
+### Code Quality Tools
+- **Ruff** - Linting and formatting
+- **GittyLeaks** - Secret detection
+- **Pre-commit hooks** - Code quality enforcement
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Running Development Server
+```bash
+uv run main.py  # Auto-reload enabled
+```
 
+## 🤝 Contributing
 
+We welcome contributions! Please follow these steps:
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[![OWASP 2023 Top10 API vulnerabilities](https://img.shields.io/badge/OWASP-2023_Top10_API_vulnerabilities-blue)](https://owasp.org/API-Security/editions/2023/en/0x11-t10/)
+1. **Fork the Project**
+2. **Create your Feature Branch** (`git checkout -b feature/AmazingFeature`)
+3. **Commit your Changes** (`git commit -m 'Add some AmazingFeature'`)
+4. **Push to the Branch** (`git push origin feature/AmazingFeature`)
+5. **Open a Pull Request**
+
+### Contributing Guidelines
+- Follow the existing code style
+- Add tests for new features
+- Update documentation as needed
+- Ensure all security demonstrations work correctly
+
+## 📄 License
+
+Distributed under the GNU General Public License v3.0. See `LICENSE` for more information.
+
+## 📞 Contact
+
+**Guillaume Pot**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/062guillaumepot/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/guillaumepot)
+
+**Project Link**: [https://github.com/guillaumepot/POC-APIs-security](https://github.com/guillaumepot/POC-APIs-security)
+
+---
+
+## ⚠️ Disclaimer
+
+This project is intended **solely for educational purposes**. The vulnerable code examples are designed to help developers understand common API security pitfalls and how to avoid them. 
+
+**DO NOT** use this code in production environments or as a basis for real applications without proper security reviews and implementations.
+
+---
+
+<div align="center">
+  <p><strong>🔐 Learn. Secure. Protect. 🔐</strong></p>
+  <p><em>Understanding vulnerabilities is the first step to building secure APIs</em></p>
+</div>
